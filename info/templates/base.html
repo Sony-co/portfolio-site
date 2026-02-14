@@ -1,0 +1,179 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}My Portfolio{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+    html, body { height: 100%; }
+
+    /* No scroll for this one-screen layout */
+    body { overflow: hidden; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR (fixed) */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 40px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      z-index: 10;
+    }
+
+    nav h1 { font-size: 26px; font-weight: 800; }
+    nav h1 span { color: #2d6cdf; }
+
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav a { color: #fff; opacity: 0.9; }
+    nav a:hover { opacity: 1; }
+
+    /* HERO full screen minus navbar */
+    body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HERO */
+.hero {
+  flex: 1; /* fills remaining space */
+  background: url("{% static 'images/bg.jpg' %}") center/cover no-repeat;
+  position: relative;
+  color: white;
+  padding: 120px 80px 40px 80px; /* top left spacing */
+}
+
+/* overlay */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin-left: 0;   /* left align */
+}
+
+/* FOOTER */
+footer{
+  position: relative;
+  min-height: 90px;            /* thickness */
+  display: flex;
+  align-items: center;         /* vertical center */
+  justify-content: center;     /* horizontal center */
+  text-align: center;
+  color: white;
+
+  background: url("{% static 'images/bg.jpg' %}") center/cover no-repeat;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+}
+
+footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.55); /* same overlay as hero */
+
+}
+
+footer *{
+  position: relative;
+  z-index: 1;
+}
+
+
+    /* content container */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 80px;
+    }
+
+    .hero h2 {
+      font-size: 18px;
+      font-weight: 500;
+      opacity: 0.85;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 28px;
+      line-height: 1.45;
+      font-weight: 700;
+      max-width: 780px;
+    }
+
+    .contact a {
+      color: #4ea1ff;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 12px 22px;
+      background: #2d6cdf;
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      body { overflow: auto; } /* allow scroll on small screens */
+      nav { padding: 0 16px; }
+      nav ul { gap: 12px; }
+      .container { padding: 0 16px; }
+      .hero p { font-size: 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h1>Sony.</h1>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/projects">Projects</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/contacts">Contact Me</a></li>
+
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+  <footer>
+  © 2026 Siddhanth Das — Portfolio
+    </footer>
+</body>
+</html>
